@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Calibri', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    width: 90vw;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.3)), url("sky.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    max-width: 900px;
+    margin-left: 180px;
+    padding: 60px;
+}
+
+/* Header */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 48px;
+}
+
+.top-bar h1 {
+    font-weight: 600;
+    font-size: 40px;
+    letter-spacing: -0.5px;
+    color: #223142;
+}
+
+.subtitle {
+    font-weight: 400;
+    font-size: 15px;
+    color: #6d8298;
+    margin-top: 6px;
+}
+
+/* Status box */
+.status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(34, 49, 66, 0.08);
+    border-radius: 30px;
+    backdrop-filter: blur(6px);
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #6d8298;
+    flex-shrink: 0;
+    transition: background 0.3s ease;
+}
+
+.status-dot.online {
+    background: #4caf7d;
+    box-shadow: 0 0 0 4px rgba(76, 175, 125, 0.18);
+}
+
+.status-dot.offline {
+    background: #d9534f;
+    box-shadow: 0 0 0 4px rgba(217, 83, 79, 0.16);
+}
+
+.status-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.35;
+}
+
+.status-text span:first-child {
+    font-size: 13px;
+    font-weight: 500;
+    color: #223142;
+}
+
+.status-text span:last-child {
+    font-size: 12px;
+    color: #6d8298;
+}
+
+/* Stat Cards */
+.cards {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.temp-card,
+.hum-card {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(34, 49, 66, 0.08);
+    border-radius: 28px;
+    padding: 28px 30px;
+    backdrop-filter: blur(6px);
+    width: 400px;
+}
+
+.card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.card-top span {
+    font-size: 15px;
+    font-weight: 500;
+    color: #6d8298;
+}
+
+/* Icons */
+.icon {
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.temp-icon {
+    background-color: #e9c0aa;
+}
+
+.hum-icon {
+    background-color: #b6d2e1;
+}
+
+.cam-icon {
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    border-radius: 50%;
+    color: #ed8c8c;
+}
+
+/* Typography & Figures */
+.big-figure {
+    font-weight: 300;
+    font-size: 64px;
+    line-height: 1;
+    color: #223142;
+}
+
+.big-figure.small {
+    font-size: 40px;
+}
+
+.big-figure small {
+    font-size: 26px;
+    font-weight: 400;
+    color: #6d8298;
+    margin-left: 4px;
+}
+
+.figure-caption {
+    margin-top: 14px;
+    font-size: 14px;
+    color: #6d8298;
+}
+
+/* Humidity Gauge */
+.gauge-row {
+    position: relative;
+    
+    width: 120px;
+    height: 120px;
+}
+
+.gauge {
+    width: 120px;
+    height: 120px;
+    transform: rotate(-90deg);
+}
+
+.gauge-track {
+    fill: none;
+    stroke: #b5cfdf;
+    stroke-width: 10;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke: #4fa3d1;
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 327;
+    stroke-dashoffset: 327;
+    transition: stroke-dashoffset 0.6s ease;
+}
+
+.gauge-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Camera Feed Section */
+.feed-card {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(34, 49, 66, 0.08);
+    border-radius: 28px;
+    padding: 28px 30px;
+    backdrop-filter: blur(6px);
+}
+
+.cam-feed {
+    height: 320px;
+    border: 1.5px dashed rgba(109, 130, 152, 0.35);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 6px;
+    padding: 20px;
+}
+
+.cam-placeholder {
+    font-size: 16px;
+    font-weight: 500;
+    color: #223142;
+}
+
+.cam-hint {
+    font-size: 13px;
+    color: #6d8298;
+    max-width: 320px;
+}
+
+.cam-feed video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+}
+
+.cam-feed video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.feed-card img {
+    width: 30%;
+    height: 30%;
+    object-fit: cover;
+    border-radius: 12px;
+    position: relative;
+    left: 70%;
+    top: 100%;
+}

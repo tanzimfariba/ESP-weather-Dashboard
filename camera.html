@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camera Broadcaster</title>
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <style>
+    body { font-family: sans-serif; text-align: center; background:#111; color:#eee; margin:0; padding:20px; }
+    video { width: 100%; max-width: 480px; border-radius: 12px; margin: 16px 0; background:#000; }
+    button { padding: 14px 24px; font-size: 16px; border-radius: 8px; border: none; background: #4a90d9; color: white; }
+    #status { margin-top: 10px; font-size: 14px; color: #aaa; }
+  </style>
+</head>
+<body>
+  <h2>Phone Camera Broadcaster</h2>
+  <video id="preview" autoplay playsinline muted></video>
+  <br>
+  <button id="startBtn">Start Streaming to Dashboard</button>
+  <p id="status">Not started</p>
+
+  <script>
+    const DASHBOARD_PEER_ID = "fariba-esp-weather-cam-viewer";
+const preview = document.getElementById("preview");
+const statusEl = document.getElementById("status");
+const startBtn = document.getElementById("startBtn");
+
+startBtn.disabled = true;
+statusEl.textContent = "Connecting…";
+
+const peer = new Peer();
+
+peer.on("open", (id) => {
+  console.log("Broadcaster ready, my ID:", id);
+  startBtn.disabled = false;
+  statusEl.textContent = "Ready";
+});
+
+startBtn.addEventListener("click", async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" },
+      audio: false
+    });
+    preview.srcObject = stream;
+
+    statusEl.textContent = "Calling dashboard…";
+    const call = peer.call(DASHBOARD_PEER_ID, stream);
+
+    if (!call) {
+      statusEl.textContent = "Call failed to start — peer not ready";
+      return;
+    }
+
+    call.on("stream", () => {});
+    call.on("close", () => statusEl.textContent = "Call ended");
+    call.on("error", (e) => statusEl.textContent = "Call error: " + e);
+
+    call.peerConnection.addEventListener("connectionstatechange", () => {
+      statusEl.textContent = "Connection: " + call.peerConnection.connectionState;
+    });
+
+  } catch (err) {
+    statusEl.textContent = "Camera error: " + err.message;
+  }
+});
+
+peer.on("error", (err) => statusEl.textContent = "Peer error: " + err);
+  </script>
+</body>
+</html>

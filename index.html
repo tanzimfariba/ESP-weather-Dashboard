@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ESP Weather Cast</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="top-bar">
+        <div>
+          <h1>ESP Weather Cast</h1>
+          <p class="subtitle">Dhaka, Bangladesh</p>
+        </div>
+        <div class="status">
+          <span class="status-dot" id="statusDot"></span>
+          <div class="status-text">
+            <span id="statusLabel">Connecting&hellip;</span>
+            <span id="clock">--:--:--</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="cards">
+        <div class="temp-card">
+          <div class="card-top">
+            <img
+              src="temperature-full-solid-full.svg"
+              alt="Temperature Icon"
+              class="icon temp-icon"
+            />
+            <span>Temperature</span>
+          </div>
+          <h2 class="big-figure">
+            <span id="tempValue">--</span><small>&deg;C</small>
+          </h2>
+          <p class="figure-caption" id="tempCaption">Waiting for a reading</p>
+        </div>
+
+        <div class="hum-card">
+          <div class="card-top">
+            <img
+              src="droplet-solid-full.svg"
+              alt="Humidity Icon"
+              class="icon hum-icon"
+            />
+            <span>Humidity</span>
+          </div>
+          <div class="gauge-row">
+            <svg class="gauge" viewBox="0 0 120 120">
+              <circle class="gauge-track" cx="60" cy="60" r="52"></circle>
+              <circle
+                class="gauge-fill"
+                id="humGaugeFill"
+                cx="60"
+                cy="60"
+                r="52"
+              ></circle>
+            </svg>
+            <div class="gauge-label">
+              <h2 class="big-figure small">
+                <span id="humValue">--</span><small>%</small>
+              </h2>
+            </div>
+          </div>
+          <p class="figure-caption" id="humCaption">Waiting for a reading</p>
+        </div>
+      </div>
+
+      <div class="feed-card">
+        <img src="QR_Camera_Feed.jpeg" alt="" />
+        <div class="card-top">
+          <svg class="icon cam-icon" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M4 8.5C4 7.67 4.67 7 5.5 7H7.5L8.4 5.55C8.68 5.1 9.17 4.83 9.7 4.83H14.3C14.83 4.83 15.32 5.1 15.6 5.55L16.5 7H18.5C19.33 7 20 7.67 20 8.5V17.5C20 18.33 19.33 19 18.5 19H5.5C4.67 19 4 18.33 4 17.5V8.5Z"
+              stroke="currentColor"
+              stroke-width="1.4"
+              stroke-linejoin="round"
+            />
+            <circle
+              cx="12"
+              cy="13"
+              r="3.4"
+              stroke="currentColor"
+              stroke-width="1.4"
+            />
+          </svg>
+          <span>Mobile Camera Feed</span>
+        </div>
+        <div class="cam-feed" id="camFeed">
+          <video
+            id="camVideo"
+            autoplay
+            playsinline
+            muted
+            style="display: none"
+          ></video>
+          <p id="camPlaceholder" class="cam-placeholder">Not connected yet</p>
+          <p id="camHint" class="cam-hint">
+            This tile is ready for your phone's stream &mdash; point it here
+            once it's set up.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
